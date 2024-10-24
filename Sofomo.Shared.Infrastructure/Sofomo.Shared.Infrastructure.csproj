@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Sofomo.Shared.Abstraction\Sofomo.Shared.Abstraction.csproj" />
+    <ProjectReference Include="..\Sofomo.Wetaher.Application\Sofomo.Weather.Application.csproj" />
   </ItemGroup>
 
 </Project>

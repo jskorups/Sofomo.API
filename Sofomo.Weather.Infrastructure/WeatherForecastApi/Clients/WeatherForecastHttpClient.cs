@@ -1,12 +1,16 @@
 ﻿using Microsoft.AspNetCore.WebUtilities;
+using Sofomo.Weather.Application.GeoCoordinates.Clients;
+using Sofomo.Weather.Domain.DTOs;
+using Sofomo.Weather.Infrastructure.WeatherForecastApi.Configuration;
 using System.Net;
 using System.Text.Json;
 
-namespace Sofomo.Shared.Infrastructure.Clients;
+
+namespace Sofomo.Weather.Infrastructure.WeatherForecastApi.Clients;
 
 public class WeatherForecastHttpClient(IHttpClientFactory _httpClientFactory) : IWeatherForecastHttpClient
 {
-    public async Task<WeatherForecastExternalResponseDTO?> GetWeatherForecastAsync(double latitude, double longitude, CancellationToken cancellationToken)
+    public async Task<WeatherForecastResponseDTO?> GetWeatherForecastAsync(double latitude, double longitude, CancellationToken cancellationToken)
     {
         HttpClient client = _httpClientFactory.CreateClient();
 
@@ -22,7 +26,7 @@ public class WeatherForecastHttpClient(IHttpClientFactory _httpClientFactory) : 
 
         HttpResponseMessage response = await client.GetAsync(uri, cancellationToken);
 
-        return await TryParseResponse<WeatherForecastExternalResponseDTO>(response);
+        return await TryParseResponse<WeatherForecastResponseDTO>(response);
     }
 
     private async Task<T?> TryParseResponse<T>(HttpResponseMessage response)

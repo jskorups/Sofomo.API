@@ -7,10 +7,24 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="WeatherForecastApi\Clients\" />
-    <Folder Include="WeatherForecastApi\Database\Context\" />
-    <Folder Include="WeatherForecastApi\Database\Mappings\" />
-    <Folder Include="WeatherForecastApi\Repositories\" />
+    <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="8.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite" Version="8.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Sofomo.Shared.Infrastructure\Sofomo.Shared.Infrastructure.csproj" />
+    <ProjectReference Include="..\Sofomo.Weather.Domain\Sofomo.Weather.Domain.csproj" />
+    <ProjectReference Include="..\Sofomo.Wetaher.Application\Sofomo.Weather.Application.csproj" />
   </ItemGroup>
 
 </Project>

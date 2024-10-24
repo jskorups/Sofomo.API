@@ -7,7 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Clients\" />
+    <Folder Include="Handlers\" />
+    <Folder Include="WeatherForecast\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Sofomo.Shared.Abstraction\Sofomo.Shared.Abstraction.csproj" />
+    <ProjectReference Include="..\Sofomo.Weather.Domain\Sofomo.Weather.Domain.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace Sofomo.Shared.Infrastructure;
+﻿namespace Sofomo.Weather.Infrastructure.WeatherForecastApi;
 
 public class WeatherForecastApiOptions : IWeatherForecastApiOptions
 {
