@@ -11,10 +11,5 @@ namespace Sofomo.Weather.Domain.Utils
         {
             return new Point(longitude, latitude) { SRID = _spatialRefrenceIdentifier };
         }
-
-        public static bool IsValidPoint(double latitude, double longitude)
-        {
-            return latitude >= -90 && latitude <= 90 && longitude >= -180 && longitude <= 180;
-        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Sofomo.Shared.Abstraction.Queries;
+using System.Threading;
 
 namespace Sofomo.Shared.Infrastructure.Queries;
 
@@ -12,7 +13,7 @@ internal sealed class QueryDispatcher : IQueryDispatcher
         _serviceProvider = serviceProvider;
     }
 
-    public async Task<TResult> QueryAsync<TResult>(IQuery<TResult> query)
+    public async Task<TResult> QueryAsync<TResult>(IQuery<TResult> query, CancellationToken cancellationToken = default)
     {
         using var scope = _serviceProvider.CreateScope();
         var handlerType = typeof(IQueryHandler<,>).MakeGenericType(query.GetType(), typeof(TResult));
@@ -25,6 +26,6 @@ internal sealed class QueryDispatcher : IQueryDispatcher
             throw new InvalidOperationException("Invalid query handler.");
         }
 
-        return await (Task<TResult>)method?.Invoke(handler, new[] { query });
+        return await (Task<TResult>)method?.Invoke(handler, new object[] { query, cancellationToken });
     }
 }

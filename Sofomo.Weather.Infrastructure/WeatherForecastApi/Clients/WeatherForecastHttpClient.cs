@@ -2,13 +2,14 @@
 using Sofomo.Weather.Application.GeoCoordinates.Clients;
 using Sofomo.Weather.Domain.DTOs;
 using Sofomo.Weather.Infrastructure.WeatherForecastApi.Configuration;
+using Sofomo.Weather.Infrastructure.WeatherForecastApi.Exceptions;
 using System.Net;
 using System.Text.Json;
 
 
 namespace Sofomo.Weather.Infrastructure.WeatherForecastApi.Clients;
 
-public class WeatherForecastHttpClient(IHttpClientFactory _httpClientFactory) : IWeatherForecastHttpClient
+public class WeatherForecastHttpClient(IHttpClientFactory _httpClientFactory, IWeatherForecastApiOptions _options) : IWeatherForecastHttpClient
 {
     public async Task<WeatherForecastResponseDTO?> GetWeatherForecastAsync(double latitude, double longitude, CancellationToken cancellationToken)
     {
@@ -22,7 +23,7 @@ public class WeatherForecastHttpClient(IHttpClientFactory _httpClientFactory) : 
             [WeatherForecastHttpConfiguration.Daily] = string.Join(",", WeatherForecastHttpConfiguration.Temperature2mMax, WeatherForecastHttpConfiguration.Temperature2mMin, WeatherForecastHttpConfiguration.WeatherCode, WeatherForecastHttpConfiguration.UvIndexMax, WeatherForecastHttpConfiguration.RainSum)
         };
 
-        string uri = QueryHelpers.AddQueryString("https://api.open-meteo.com/v1/forecast", query!);
+        string uri = QueryHelpers.AddQueryString(_options.BaseUrl, query!);
 
         HttpResponseMessage response = await client.GetAsync(uri, cancellationToken);
 
@@ -39,8 +40,8 @@ public class WeatherForecastHttpClient(IHttpClientFactory _httpClientFactory) : 
         return response.StatusCode switch
         {
             HttpStatusCode.OK => JsonSerializer.Deserialize<T>(await response.Content.ReadAsStringAsync(), options),
-            HttpStatusCode.NotFound => throw new ArgumentException("NotFound"),
-            HttpStatusCode.Unauthorized => throw new ArgumentException("Unauthorized"),
+            HttpStatusCode.NotFound => throw new ForecastNotFoundException(),
+            HttpStatusCode.Unauthorized => throw new InvalidAuthorizationException(),
             _ => throw new ArgumentException("Error while fetching data from Maps API")
         };
     }
