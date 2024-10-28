@@ -101,7 +101,7 @@ internal class WeatherForecastSeeder(SofomoContext dbContext) : IWeatherForecast
             RainSumUnit = "mm"
         }
     }
-//};
+};
         return forecasts;
     }
 }

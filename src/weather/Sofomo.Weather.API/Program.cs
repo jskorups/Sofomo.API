@@ -4,6 +4,7 @@ using Sofomo.Shared.Infrastructure.Exceptions;
 using Sofomo.Shared.Infrastructure.Queries;
 using Sofomo.Shared.Infrastructure.Swagger;
 using Sofomo.Weather.Infrastructure.WeatherForecastApi;
+using Sofomo.Weather.Infrastructure.WeatherForecastApi.Seeders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,12 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 //}
+
+
+var scope = app.Services.CreateScope();
+var seeder = scope.ServiceProvider.GetRequiredService<IWeatherForecastSeeder>();
+await seeder.Seed();
+
 
 // Configure the HTTP request pipeline.
 app.UseSwaggerMiddleware();

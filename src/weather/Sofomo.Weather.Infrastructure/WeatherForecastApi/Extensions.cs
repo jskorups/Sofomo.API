@@ -10,6 +10,7 @@ using Sofomo.Weather.Infrastructure.WeatherForecastApi.Clients;
 using Sofomo.Weather.Infrastructure.WeatherForecastApi.Database.Context;
 using Sofomo.Weather.Infrastructure.WeatherForecastApi.Queries;
 using Sofomo.Weather.Infrastructure.WeatherForecastApi.Repositories;
+using Sofomo.Weather.Infrastructure.WeatherForecastApi.Seeders;
 
 namespace Sofomo.Weather.Infrastructure.WeatherForecastApi;
 
@@ -31,6 +32,7 @@ public static class Extensions
             options.UseSqlServer(connectionString, x => x.UseNetTopologySuite());
         });
 
+        services.AddScoped<IWeatherForecastSeeder, WeatherForecastSeeder>();
         services.AddScoped<IWeatherForecastRepository, WeatherForecastRepository>();
         services.AddScoped<ILocationQuery, LocationQuery>();
         services.AddScoped<ILocationRepository, LocationRepository>();
