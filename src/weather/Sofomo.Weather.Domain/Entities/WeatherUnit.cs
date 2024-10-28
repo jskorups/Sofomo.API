@@ -17,8 +17,8 @@ public class WeatherUnit
 
     public string? RainSumUnit { get; init; }
 
-    public static WeatherUnit Create(Guid id, string timeUnit, string weatherCodeUnit, string maxTemperatureUnit,
-        string maxUvIndexUnit, string minTemperatureUnit, string rainSumUnit)
+    public static WeatherUnit Create(Guid id, string timeUnit, string weatherCodeUnit, string maxTemperatureUnit, string minTemperatureUnit,
+        string maxUvIndexUnit, string rainSumUnit)
     {
         return new()
         {

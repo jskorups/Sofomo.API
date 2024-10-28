@@ -45,6 +45,12 @@ namespace Sofomo.Weather.Application.Handlers.Queries
             return CreateResponseFromWeatherForecast(weatherForecastToReturn);
         }
 
+        private async Task<WeatherForecastResponseDTO> FetchWeatherData(GetWeatherForecastQuery query, CancellationToken cancellationToken)
+        {
+            var response = await _weatherForecastHttpClient.GetWeatherForecastAsync(query.Latitude, query.Longitude, cancellationToken);
+            return response ?? throw new ArgumentNullException(nameof(response), "Weather data could not be retrieved.");
+        }
+
         private static WeatherForecastDTO CreateResponseFromWeatherForecast(WeatherForecast weatherForecast)
         {
             return new WeatherForecastDTO
@@ -59,22 +65,12 @@ namespace Sofomo.Weather.Application.Handlers.Queries
                 {
                     Date = weatherForecast.WeatherUnit.TimeUnit ?? "",
                     MaxTemperature = weatherForecast.WeatherUnit.MaxTemperatureUnit ?? "",
-                    MaxUvIndex = weatherForecast.WeatherUnit.MaxUvIndexUnit ?? "",
                     MinTemperature = weatherForecast.WeatherUnit.MinTemperatureUnit ?? "",
+                    MaxUvIndex = weatherForecast.WeatherUnit.MaxUvIndexUnit ?? "",
                     RainSum = weatherForecast.WeatherUnit.RainSumUnit ?? "",
                     WeatherCode = weatherForecast.WeatherUnit.WeatherCodeUnit ?? "",
                 }
             };
-        }
-
-        private async Task<WeatherForecastResponseDTO> FetchWeatherData(GetWeatherForecastQuery query, CancellationToken cancellationToken)
-        {
-            WeatherForecastResponseDTO? externalResponse = await _weatherForecastHttpClient.GetWeatherForecastAsync(query.Latitude, query.Longitude, cancellationToken);
-            if (externalResponse is null || externalResponse.Daily is null)
-            {
-                throw new ArgumentNullException(nameof(externalResponse));
-            }
-            return externalResponse!;
         }
 
         private static WeatherForecast[] CreateWeatherForecastsForNewLocation(GetWeatherForecastQuery query, WeatherForecastResponseDTO externalResponse)
@@ -127,9 +123,15 @@ namespace Sofomo.Weather.Application.Handlers.Queries
                     externalResponse.Daily.UvIndexMax[index],
                     externalResponse.Daily.RainSum[index],
                     externalResponse.Daily.Time[index],
-                    WeatherUnit.Create(Guid.NewGuid(), externalResponse.DailyUnits.Time, externalResponse.DailyUnits.WeatherCode,
-                    externalResponse.DailyUnits.Temperature2mMax, externalResponse.DailyUnits.Temperature2mMin, externalResponse.DailyUnits.UvIndexMax,
-                    externalResponse.DailyUnits.RainSum)
+                     WeatherUnit.Create(
+                        Guid.NewGuid(),
+                        externalResponse.DailyUnits.Time,
+                        externalResponse.DailyUnits.WeatherCode,
+                        externalResponse.DailyUnits.Temperature2mMax,
+                        externalResponse.DailyUnits.Temperature2mMin,
+                        externalResponse.DailyUnits.UvIndexMax,
+                        externalResponse.DailyUnits.RainSum
+                        )
                 );
 
                 weatherForecastsToStore.Add(weatherForecastToStore);

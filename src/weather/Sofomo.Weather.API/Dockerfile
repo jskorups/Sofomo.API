@@ -9,15 +9,15 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Sofomo.Weather.API/Sofomo.Weather.API.csproj", "Sofomo.Weather.API/"]
-COPY ["Sofomo.Shared.Infrastructure/Sofomo.Shared.Infrastructure.csproj", "Sofomo.Shared.Infrastructure/"]
-COPY ["Sofomo.Shared.Abstraction/Sofomo.Shared.Abstraction.csproj", "Sofomo.Shared.Abstraction/"]
-COPY ["Sofomo.Wetaher.Application/Sofomo.Weather.Application.csproj", "Sofomo.Wetaher.Application/"]
-COPY ["Sofomo.Weather.Domain/Sofomo.Weather.Domain.csproj", "Sofomo.Weather.Domain/"]
-COPY ["Sofomo.Weather.Infrastructure/Sofomo.Weather.Infrastructure.csproj", "Sofomo.Weather.Infrastructure/"]
-RUN dotnet restore "./Sofomo.Weather.API/./Sofomo.Weather.API.csproj"
+COPY ["src/weather/Sofomo.Weather.API/Sofomo.Weather.API.csproj", "src/weather/Sofomo.Weather.API/"]
+COPY ["src/shared/Sofomo.Shared.Infrastructure/Sofomo.Shared.Infrastructure.csproj", "src/shared/Sofomo.Shared.Infrastructure/"]
+COPY ["src/weather/Sofomo.Weather.Application/Sofomo.Weather.Application.csproj", "src/weather/Sofomo.Weather.Application/"]
+COPY ["src/shared/Sofomo.Shared.Abstraction/Sofomo.Shared.Abstraction.csproj", "src/shared/Sofomo.Shared.Abstraction/"]
+COPY ["src/weather/Sofomo.Weather.Domain/Sofomo.Weather.Domain.csproj", "src/weather/Sofomo.Weather.Domain/"]
+COPY ["src/weather/Sofomo.Weather.Infrastructure/Sofomo.Weather.Infrastructure.csproj", "src/weather/Sofomo.Weather.Infrastructure/"]
+RUN dotnet restore "./src/weather/Sofomo.Weather.API/./Sofomo.Weather.API.csproj"
 COPY . .
-WORKDIR "/src/Sofomo.Weather.API"
+WORKDIR "/src/src/weather/Sofomo.Weather.API"
 RUN dotnet build "./Sofomo.Weather.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish

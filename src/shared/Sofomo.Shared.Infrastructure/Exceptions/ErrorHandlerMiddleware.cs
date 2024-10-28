@@ -32,14 +32,9 @@ internal class ErrorHandlerMiddleware : IMiddleware
     private async Task HandleErrorAsync(HttpContext context, Exception exception)
     {
         var errorResponse = _mapper.Map(exception);
-
         context.Response.StatusCode = (int)(errorResponse?.StatusCode ?? HttpStatusCode.InternalServerError);
 
-        var response = errorResponse?.Response;
-        if (response is null)
-        {
-            return;
-        }
+        var response = errorResponse?.Response ?? new { error = exception.Message };
 
         await context.Response.WriteAsJsonAsync(response);
     }
