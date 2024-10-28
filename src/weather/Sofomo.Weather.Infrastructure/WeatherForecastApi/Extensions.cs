@@ -32,7 +32,6 @@ public static class Extensions
             options.UseSqlServer(connectionString, x => x.UseNetTopologySuite());
         });
 
-
         services.AddScoped<IDbInitializer, DbInitializer>();
         services.AddScoped<IWeatherForecastRepository, WeatherForecastRepository>();
         services.AddScoped<ILocationQuery, LocationQuery>();

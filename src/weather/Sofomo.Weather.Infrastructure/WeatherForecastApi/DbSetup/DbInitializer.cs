@@ -4,7 +4,6 @@ using Sofomo.Weather.Domain.Entities;
 using Sofomo.Weather.Domain.Enums;
 using Sofomo.Weather.Infrastructure.WeatherForecastApi.Database.Context;
 
-
 namespace Sofomo.Weather.Infrastructure.WeatherForecastApi.DbSetup;
 
 internal class DbInitializer(SofomoContext dbContext) : IDbInitializer
