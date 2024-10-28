@@ -4,19 +4,23 @@ using Sofomo.Weather.Domain.Entities;
 using Sofomo.Weather.Domain.Enums;
 using Sofomo.Weather.Infrastructure.WeatherForecastApi.Database.Context;
 
-namespace Sofomo.Weather.Infrastructure.WeatherForecastApi.DbInitializer;
 
-internal class WeatherForecastSeeder(SofomoContext dbContext) : IWeatherForecastSeeder
+namespace Sofomo.Weather.Infrastructure.WeatherForecastApi.DbSetup;
+
+internal class DbInitializer(SofomoContext dbContext) : IDbInitializer
 {
-    public async Task Seed()
+    public async Task DbInitializeAsync()
     {
+        if (dbContext.Database.GetPendingMigrations().Any())
+        {
+            await dbContext.Database.MigrateAsync();
+        }
         if (await dbContext.Database.CanConnectAsync())
         {
             if (dbContext.Database.GetPendingMigrations().Any())
             {
                 await dbContext.Database.MigrateAsync();
             }
-
             if (!dbContext.WeatherForecasts.Any())
             {
                 var forecasts = GetForecasts();
