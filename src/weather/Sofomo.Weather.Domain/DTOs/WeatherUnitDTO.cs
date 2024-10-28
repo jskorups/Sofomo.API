@@ -1,5 +1,4 @@
-﻿
-namespace Sofomo.Weather.Domain.DTOs
+﻿namespace Sofomo.Weather.Domain.DTOs
 {
     public class WeatherUnitDTO
     {
@@ -9,6 +8,5 @@ namespace Sofomo.Weather.Domain.DTOs
         public string MinTemperature { get; init; } = default!;
         public string RainSum { get; init; } = default!;
         public string WeatherCode { get; set; } = default!;
-
     }
 }

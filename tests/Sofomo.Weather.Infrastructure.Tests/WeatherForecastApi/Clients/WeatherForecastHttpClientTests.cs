@@ -1,14 +1,14 @@
-﻿using Moq;
+﻿using FluentAssertions;
+using Moq;
+using Sofomo.Weather.Application.GeoCoordinates.Clients;
 using Sofomo.Weather.Domain.DTOs;
+using Sofomo.Weather.Infrastructure.Tests.WeatherForecastApi.Helpers;
+using Sofomo.Weather.Infrastructure.WeatherForecastApi;
 using Sofomo.Weather.Infrastructure.WeatherForecastApi.Clients;
 using Sofomo.Weather.Infrastructure.WeatherForecastApi.Exceptions;
 using System.Net;
 using System.Text.Json;
 using Xunit;
-using FluentAssertions;
-using Sofomo.Weather.Infrastructure.Tests.WeatherForecastApi.Helpers;
-using Sofomo.Weather.Infrastructure.WeatherForecastApi;
-using Sofomo.Weather.Application.GeoCoordinates.Clients;
 
 namespace Sofomo.Weather.Tests.Unit.Clients;
 
@@ -19,6 +19,7 @@ public class WeatherForecastHttpClientTests
     private readonly MockHttpMessageHandler _mockHttpMessageHandler;
 
     private readonly IWeatherForecastHttpClient _weatherForecastHttpClient;
+
     public WeatherForecastHttpClientTests()
     {
         _optionsMock = new Mock<IWeatherForecastApiOptions>();
@@ -30,7 +31,6 @@ public class WeatherForecastHttpClientTests
 
         _weatherForecastHttpClient = new WeatherForecastHttpClient(_httpClientFactoryMock.Object, _optionsMock.Object);
     }
-
 
     [Fact]
     public async Task GetWeatherForecastAsync_GivenValidLocation_ShouldReturnForecast()

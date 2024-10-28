@@ -1,6 +1,4 @@
-﻿
-
-using Sofomo.Weather.Domain.Enums;
+﻿using Sofomo.Weather.Domain.Enums;
 
 namespace Sofomo.Weather.Domain.Entities;
 
@@ -75,9 +73,8 @@ public class WeatherForecast
     public WeatherCondition WeatherTypeId { get; init; }
 
     public virtual WeatherUnit WeatherUnit { get; init; } = default!;
-     
-    public Guid WeatherUnitId { get; init; }
 
+    public Guid WeatherUnitId { get; init; }
 
     public static WeatherForecast Create(
         Guid id,

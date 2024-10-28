@@ -2,7 +2,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Sofomo.Shared.Abstraction.Exceptions;
 
-
 namespace Sofomo.Shared.Infrastructure.Exceptions;
 
 public static class Extensions

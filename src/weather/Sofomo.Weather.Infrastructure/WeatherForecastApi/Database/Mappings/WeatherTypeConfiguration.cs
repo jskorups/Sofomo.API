@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Sofomo.Weather.Domain.Entities;
 using Sofomo.Weather.Domain.Enums;
 using Sofomo.Weather.Infrastructure.WeatherForecastApi.Database.Context;

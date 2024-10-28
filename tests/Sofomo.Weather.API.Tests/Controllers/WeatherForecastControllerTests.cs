@@ -23,7 +23,6 @@ namespace Sofomo.Weather.Tests.Controllers
         [Fact]
         public async Task GetWeatherForecastAsync_ReturnsOkResult()
         {
-
             var query = new GetWeatherForecastQuery(Latitude: 50, Longitude: 40);
             // Arrange
             _mockQueryDispatcher

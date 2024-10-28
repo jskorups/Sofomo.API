@@ -3,7 +3,6 @@ using Sofomo.Shared.Abstraction.Exceptions;
 using System.Collections.Concurrent;
 using System.Net;
 
-
 namespace Sofomo.Shared.Infrastructure.Exceptions
 {
     internal class ExceptionToResponseMapper : IExceptionToResponseMapper

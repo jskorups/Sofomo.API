@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Sofomo.Shared.Abstraction.Commands;
 using Sofomo.Shared.Abstraction.Queries;
 using Sofomo.Weather.Application.Commands;
 using Sofomo.Weather.Application.Queries;
-using Sofomo.Weather.Domain.DTOs;
 using System.Net;
 
 namespace Sofomo.Weather.API.Controllers;
@@ -21,7 +19,6 @@ public class GeolocationController(IQueryDispatcher queryDispatcher, ICommandDis
         return Ok(result);
     }
 
-
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     public async Task<IActionResult> AddGeolocationCoordinatesAsync([FromBody] CreateGeographicalCoordinatesCommand command, CancellationToken cancellationToken)
@@ -37,6 +34,4 @@ public class GeolocationController(IQueryDispatcher queryDispatcher, ICommandDis
         await commandDispatcher.SendAsync(command, cancellationToken);
         return NoContent();
     }
-
-
 }

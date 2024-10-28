@@ -3,7 +3,6 @@ using Microsoft.Extensions.Logging;
 using Sofomo.Shared.Abstraction.Exceptions;
 using System.Net;
 
-
 namespace Sofomo.Shared.Infrastructure.Exceptions;
 
 internal class ErrorHandlerMiddleware : IMiddleware

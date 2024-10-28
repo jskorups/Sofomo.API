@@ -8,7 +8,7 @@ using Sofomo.Weather.Domain.Entities;
 namespace Sofomo.Weather.Application.Handlers.Queries;
 
 public class GetAllGeographicalCoordinatesQueryHandler(
-    ILocationRepository _locationRepository, 
+    ILocationRepository _locationRepository,
     ILogger<GetAllGeographicalCoordinatesQueryHandler> logger) : IQueryHandler<GetAllGeographicalCoordinatesQuery, CoordinatesDTO[]?>
 {
     public async Task<CoordinatesDTO[]?> HandleAsync(GetAllGeographicalCoordinatesQuery query, CancellationToken cancellationToken)

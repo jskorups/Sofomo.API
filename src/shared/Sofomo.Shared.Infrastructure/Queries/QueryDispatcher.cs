@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Sofomo.Shared.Abstraction.Queries;
-using System.Threading;
 
 namespace Sofomo.Shared.Infrastructure.Queries;
 

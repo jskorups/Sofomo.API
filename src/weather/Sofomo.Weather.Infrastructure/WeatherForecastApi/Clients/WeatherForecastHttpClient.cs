@@ -6,7 +6,6 @@ using Sofomo.Weather.Infrastructure.WeatherForecastApi.Exceptions;
 using System.Net;
 using System.Text.Json;
 
-
 namespace Sofomo.Weather.Infrastructure.WeatherForecastApi.Clients;
 
 public class WeatherForecastHttpClient(IHttpClientFactory _httpClientFactory, IWeatherForecastApiOptions _options) : IWeatherForecastHttpClient

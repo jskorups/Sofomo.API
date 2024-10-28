@@ -35,6 +35,5 @@ public class CreateGeographicalCoordinatesCommandHandler(
 
         await _locationRepository.AddAsync(locationToStore, cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-
     }
 }

@@ -1,5 +1,5 @@
 ﻿namespace Sofomo.Shared.Abstraction.Commands;
 
-public interface ICommand 
+public interface ICommand
 {
 }

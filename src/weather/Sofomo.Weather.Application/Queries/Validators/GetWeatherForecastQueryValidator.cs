@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 
-
 namespace Sofomo.Weather.Application.Queries.Validators;
 
 public class GetWeatherForecastQueryValidator : AbstractValidator<GetWeatherForecastQuery>

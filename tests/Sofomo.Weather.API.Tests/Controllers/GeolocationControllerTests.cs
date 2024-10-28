@@ -32,7 +32,6 @@ namespace Sofomo.Weather.API.Tests.Controllers
             _mockQueryDispatcher
                 .Setup(q => q.QueryAsync(It.IsAny<GetAllGeographicalCoordinatesQuery>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(new CoordinatesDTO[0]);
-            
 
             // Act
             var result = await _controller.GetAllGeolocationCoordinatesAsync(CancellationToken.None);
@@ -42,7 +41,6 @@ namespace Sofomo.Weather.API.Tests.Controllers
             Assert.Equal(StatusCodes.Status200OK, okResult.StatusCode);
             _mockQueryDispatcher.Verify(q => q.QueryAsync(It.IsAny<GetAllGeographicalCoordinatesQuery>(), It.IsAny<CancellationToken>()), Times.Once);
         }
-
 
         [Fact]
         public async Task AddGeolocationCoordinatesAsync_ReturnsCreatedStatusCode()

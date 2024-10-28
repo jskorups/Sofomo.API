@@ -1,0 +1,30 @@
+version: '3.4'
+
+services:
+  sofomo.weather.api:
+    image: ${DOCKER_REGISTRY-}sofomoweatherapi
+    build:
+      context: .
+      dockerfile: src/weather/Sofomo.Weather.API/Dockerfile
+    ports:
+       - "5000:80"    # HTTP port
+       - "7073:443"   # HTTPS port
+    depends_on:
+      - db
+    environment:
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_HTTPS_PORT=7073
+      - ConnectionStrings__DefaultConnection=Server=db;Database=YourDatabase;User=sa;Password=Mystrongpassword2024!;TrustServerCertificate=True
+
+  db:
+    image: "mcr.microsoft.com/mssql/server:2022-latest"
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Mystrongpassword2024!
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlvolume:/var/opt/mssql
+
+volumes:
+  sqlvolume:

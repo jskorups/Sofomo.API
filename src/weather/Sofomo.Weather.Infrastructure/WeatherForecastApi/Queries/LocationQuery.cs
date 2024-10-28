@@ -1,8 +1,8 @@
-﻿using NetTopologySuite.Geometries;
+﻿using Microsoft.EntityFrameworkCore;
+using NetTopologySuite.Geometries;
+using Sofomo.Weather.Application.Boundaries.Queries;
 using Sofomo.Weather.Domain.DTOs;
 using Sofomo.Weather.Infrastructure.WeatherForecastApi.Database.Context;
-using Sofomo.Weather.Application.Boundaries.Queries;
-using Microsoft.EntityFrameworkCore;
 
 namespace Sofomo.Weather.Infrastructure.WeatherForecastApi.Queries;
 
@@ -29,14 +29,13 @@ internal class LocationQuery(SofomoContext _context) : ILocationQuery
                             WeatherCode = wf.WeatherType.Description,
                             WeatherUnits = new WeatherUnitDTO
                             {
-                                Date = wf.WeatherUnit.TimeUnit ,
+                                Date = wf.WeatherUnit.TimeUnit,
                                 WeatherCode = wf.WeatherUnit.WeatherCodeUnit,
                                 MaxTemperature = wf.WeatherUnit.MaxTemperatureUnit,
                                 MinTemperature = wf.WeatherUnit.MinTemperatureUnit,
                                 RainSum = wf.WeatherUnit.RainSumUnit,
                                 MaxUvIndex = wf.WeatherUnit.MaxUvIndexUnit
                             }
-
                         })
                         .FirstOrDefault()
                     : null

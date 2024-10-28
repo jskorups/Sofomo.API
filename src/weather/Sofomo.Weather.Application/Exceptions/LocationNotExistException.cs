@@ -1,6 +1,5 @@
 ﻿using Sofomo.Shared.Abstraction.Exceptions;
 
-
 namespace Sofomo.Weather.Application.Exceptions;
 
 internal class LocationNotExistException : SofomoException

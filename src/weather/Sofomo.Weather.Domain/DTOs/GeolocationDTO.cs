@@ -1,6 +1,7 @@
 ﻿using NetTopologySuite.Geometries;
 
 namespace Sofomo.Weather.Domain.DTOs;
+
 public class GeolocationDTO
 {
     public Guid GeolocationId { get; init; }

@@ -19,8 +19,6 @@ public static class Extensions
 
     public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-
-
         var options = services.GetOptions<WeatherForecastApiOptions>(_optionsSectionName);
         services.AddSingleton<IWeatherForecastApiOptions, WeatherForecastApiOptions>(x => options);
 
@@ -32,8 +30,6 @@ public static class Extensions
         {
             options.UseSqlServer(connectionString, x => x.UseNetTopologySuite());
         });
-
-    
 
         services.AddScoped<IWeatherForecastRepository, WeatherForecastRepository>();
         services.AddScoped<ILocationQuery, LocationQuery>();

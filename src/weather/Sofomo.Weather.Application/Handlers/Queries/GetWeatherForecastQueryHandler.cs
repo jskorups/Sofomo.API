@@ -8,7 +8,6 @@ using Sofomo.Weather.Application.Queries;
 using Sofomo.Weather.Domain.Common;
 using Sofomo.Weather.Domain.DTOs;
 using Sofomo.Weather.Domain.Entities;
-using Sofomo.Weather.Domain.Enums;
 using Sofomo.Weather.Domain.Utils;
 
 namespace Sofomo.Weather.Application.Handlers.Queries
@@ -43,12 +42,8 @@ namespace Sofomo.Weather.Application.Handlers.Queries
                 .OrderByDescending(weatherForecast => weatherForecast.Date)
                 .First();
 
-
             return CreateResponseFromWeatherForecast(weatherForecastToReturn);
-
-
         }
-
 
         private static WeatherForecastDTO CreateResponseFromWeatherForecast(WeatherForecast weatherForecast)
         {
@@ -67,7 +62,7 @@ namespace Sofomo.Weather.Application.Handlers.Queries
                     MaxUvIndex = weatherForecast.WeatherUnit.MaxUvIndexUnit ?? "",
                     MinTemperature = weatherForecast.WeatherUnit.MinTemperatureUnit ?? "",
                     RainSum = weatherForecast.WeatherUnit.RainSumUnit ?? "",
-                    WeatherCode = weatherForecast.WeatherUnit.WeatherCodeUnit ?? "",                          
+                    WeatherCode = weatherForecast.WeatherUnit.WeatherCodeUnit ?? "",
                 }
             };
         }
@@ -81,7 +76,6 @@ namespace Sofomo.Weather.Application.Handlers.Queries
             }
             return externalResponse!;
         }
-
 
         private static WeatherForecast[] CreateWeatherForecastsForNewLocation(GetWeatherForecastQuery query, WeatherForecastResponseDTO externalResponse)
         {
@@ -101,11 +95,11 @@ namespace Sofomo.Weather.Application.Handlers.Queries
                     externalResponse.Daily.RainSum[index],
                     externalResponse.Daily.Time[index],
                     WeatherUnit.Create(
-                        Guid.NewGuid(), 
-                        externalResponse.DailyUnits.Time, 
+                        Guid.NewGuid(),
+                        externalResponse.DailyUnits.Time,
                         externalResponse.DailyUnits.WeatherCode,
-                        externalResponse.DailyUnits.Temperature2mMax, 
-                        externalResponse.DailyUnits.Temperature2mMin, 
+                        externalResponse.DailyUnits.Temperature2mMax,
+                        externalResponse.DailyUnits.Temperature2mMin,
                         externalResponse.DailyUnits.UvIndexMax,
                         externalResponse.DailyUnits.RainSum
                         )
@@ -149,7 +143,5 @@ namespace Sofomo.Weather.Application.Handlers.Queries
             await _weatherForecastRepository.AddRangeAsync(weatherForecastsToStore, cancellationToken);
             await _unitOfWork.SaveChangesAsync(cancellationToken);
         }
-
-
     }
 }

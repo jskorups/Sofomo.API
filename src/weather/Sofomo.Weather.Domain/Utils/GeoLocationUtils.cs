@@ -1,6 +1,5 @@
 ﻿using NetTopologySuite.Geometries;
 
-
 namespace Sofomo.Weather.Domain.Utils
 {
     public static class GeolocationUtils

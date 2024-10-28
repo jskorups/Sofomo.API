@@ -1,5 +1,4 @@
-﻿
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Sofomo.Weather.Domain.Entities;
 using Sofomo.Weather.Infrastructure.WeatherForecastApi.Database.Mappings;
 
@@ -15,9 +14,6 @@ namespace Sofomo.Weather.Infrastructure.WeatherForecastApi.Database.Context
 
         public virtual DbSet<WeatherUnit> WeatherUnits { get; set; }
 
-
-
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -25,7 +21,6 @@ namespace Sofomo.Weather.Infrastructure.WeatherForecastApi.Database.Context
             modelBuilder.ApplyConfiguration(new GeolocationConfiguration());
             modelBuilder.ApplyConfiguration(new WeatherForecastConfiguration());
             modelBuilder.ApplyConfiguration(new WeatherTypeConfiguration());
-
         }
     }
 }

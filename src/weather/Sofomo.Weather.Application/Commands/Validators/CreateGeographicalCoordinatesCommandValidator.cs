@@ -1,6 +1,4 @@
 ﻿using FluentValidation;
-using Sofomo.Weather.Application.Commands;
-
 
 namespace Sofomo.Weather.Application.Commands.Validators
 {
@@ -15,6 +13,5 @@ namespace Sofomo.Weather.Application.Commands.Validators
                 .InclusiveBetween(-180, 180)
                 .WithMessage("Longitude must be between -180 and 180");
         }
-
     }
 }

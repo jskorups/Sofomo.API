@@ -1,8 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Sofomo.Weather.Domain.Entities;
 using Sofomo.Weather.Infrastructure.WeatherForecastApi.Database.Context;
-
 
 namespace Sofomo.Weather.Infrastructure.WeatherForecastApi.Database.Mappings;
 
@@ -18,6 +17,5 @@ public class WeatherForecastConfiguration : IEntityTypeConfiguration<WeatherFore
             .WithMany(g => g.WeatherForecasts)
             .HasForeignKey(x => x.GeolocationId)
             .OnDelete(DeleteBehavior.Cascade);
-
     }
 }
