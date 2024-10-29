@@ -16,10 +16,6 @@ internal class DbInitializer(SofomoContext dbContext) : IDbInitializer
         }
         if (await dbContext.Database.CanConnectAsync())
         {
-            if (dbContext.Database.GetPendingMigrations().Any())
-            {
-                await dbContext.Database.MigrateAsync();
-            }
             if (!dbContext.WeatherForecasts.Any())
             {
                 var forecasts = GetForecasts();
