@@ -3,6 +3,7 @@ using NetTopologySuite.Geometries;
 using Sofomo.Shared.Abstraction.Queries;
 using Sofomo.Weather.Application.Boundaries.Queries;
 using Sofomo.Weather.Application.Boundaries.Repositories;
+using Sofomo.Weather.Application.Exceptions;
 using Sofomo.Weather.Application.GeoCoordinates.Clients;
 using Sofomo.Weather.Application.Queries;
 using Sofomo.Weather.Domain.Common;
@@ -48,7 +49,7 @@ namespace Sofomo.Weather.Application.Handlers.Queries
         private async Task<WeatherForecastResponseDTO> FetchWeatherData(GetWeatherForecastQuery query, CancellationToken cancellationToken)
         {
             var response = await _weatherForecastHttpClient.GetWeatherForecastAsync(query.Latitude, query.Longitude, cancellationToken);
-            return response ?? throw new ArgumentNullException(nameof(response), "Weather data could not be retrieved.");
+            return response ?? throw new WeatherDataUnavailableException(query.Latitude, query.Longitude);
         }
 
         private static WeatherForecastDTO CreateResponseFromWeatherForecast(WeatherForecast weatherForecast)
